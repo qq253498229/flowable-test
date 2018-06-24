@@ -4,14 +4,11 @@ import org.flowable.engine.FormService;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
 import org.flowable.engine.runtime.ProcessInstance;
-import org.flowable.form.api.FormInfo;
 import org.flowable.task.api.Task;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-
-import java.util.Map;
 
 import static com.example.demo.consts.FlowConsts.CREATE_PROJECT_KEY;
 import static org.springframework.http.ResponseEntity.ok;
@@ -33,6 +30,8 @@ public class ProjectController {
   private RuntimeService runtimeService;
   @Resource
   private TaskService taskService;
+  @Resource(name = "formServiceBean")
+  private FormService formService;
 
 
   @PostMapping("/create/{userId}")
@@ -45,7 +44,6 @@ public class ProjectController {
 
   @GetMapping("/form/{taskId}")
   public ResponseEntity form(@PathVariable("taskId") String taskId) {
-    FormInfo taskFormModel = taskService.getTaskFormModel(taskId);
-    return ok().build();
+    return ok(formService.getTaskFormData(taskId).getFormProperties());
   }
 }
