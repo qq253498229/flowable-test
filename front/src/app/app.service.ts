@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {catchError, map} from 'rxjs/operators';
 import 'rxjs/add/observable/of';
 import * as _ from 'underscore';
+import {environment} from '../environments/environment';
 
 @Injectable()
 export class AppService {
@@ -14,13 +15,14 @@ export class AppService {
   PROCESS_URL = '/api/process';
   BASE_URL = '';
 
-  constructor(
-    private http: HttpClient
-  ) {
+  constructor(private http: HttpClient) {
   }
 
   login(param: any): Observable<any> {
-    return this.http.post(this.BASE_URL + this.USER_URL + '/login', {userId: param['username'], password: param['password']}).pipe(
+    return this.http.post(this.BASE_URL + this.USER_URL + '/login', {
+      userId: param['username'],
+      password: param['password']
+    }).pipe(
       map(res => {
         if (res === true) {
           this.setUser(param);
@@ -101,5 +103,12 @@ export class AppService {
   claim(id: string) {
     const user = this.getUser();
     return this.http.post(this.BASE_URL + this.TASK_URL + '/claim/' + id + '/' + user['username'], null);
+  }
+
+  log(obj: any) {
+    if (environment.production) {
+      return;
+    }
+    console.log(obj);
   }
 }

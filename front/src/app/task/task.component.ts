@@ -24,7 +24,7 @@ export class TaskComponent implements OnInit {
       this.groupId = res[0]['groupId'];
     });
     this.service.getTaskList().subscribe(res => {
-      console.log(res);
+      this.service.log(res);
       this.taskList = res;
     });
   }
@@ -34,7 +34,7 @@ export class TaskComponent implements OnInit {
   }
 
   claim(id: string) {
-    console.log(id);
+    this.service.log(id);
     this.service.claim(id).subscribe(res => {
       this.ngOnInit();
     });

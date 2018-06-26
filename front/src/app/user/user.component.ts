@@ -19,7 +19,7 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.userList = this.service.getUserList();
     this.user = this.service.getUser();
-    console.log(this.userList);
+    this.service.log(this.userList);
   }
 
   logout(item: any) {

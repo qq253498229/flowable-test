@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.model);
+    this.service.log(this.model);
     this.service.login(this.model).subscribe(res => {
       if (res === true) {
         this.service.addUser(this.model);

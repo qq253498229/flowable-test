@@ -23,7 +23,7 @@ export class TaskDetailComponent implements OnInit {
     this.taskId = this.route.snapshot.paramMap.get('id');
     this.service.getTaskForm(this.taskId).subscribe(res => {
       this.properties = res;
-      console.log(this.properties);
+      this.service.log(this.properties);
     });
   }
 

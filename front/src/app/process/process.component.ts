@@ -17,13 +17,13 @@ export class ProcessComponent implements OnInit {
 
   ngOnInit() {
     this.service.processList().subscribe(res => {
-      console.log(res);
+      this.service.log(res);
       this.list = res;
     });
   }
 
   create(key: string) {
-    console.log(key);
+    this.service.log(key);
     this.service.createProcess(key).subscribe(res => {
       alert('开启实例成功');
     });
