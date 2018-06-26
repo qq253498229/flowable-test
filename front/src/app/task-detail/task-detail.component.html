@@ -1,0 +1,31 @@
+<form>
+
+  <table>
+
+    <tr *ngFor="let item of properties">
+      <td>{{item.name}}</td>
+      <td>
+        <ng-container *ngIf="item.typeName === 'long'">
+          <input type="number" [(ngModel)]="item.value" [name]="item.id">
+        </ng-container>
+        <ng-container *ngIf="item.typeName === 'string'">
+          <input type="text" [(ngModel)]="item.value" [name]="item.id">
+        </ng-container>
+        <ng-container *ngIf="item.typeName === 'enum'">
+          <select [name]="item.id" [(ngModel)]="item.value">
+            <option *ngFor="let item1 of item.enum" [value]="item1.id">{{item1.value}}</option>
+          </select>
+        </ng-container>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button type="button" (click)="complete()">提交</button>
+      </td>
+      <td>
+        <button type="button" (click)="cancel()">取消</button>
+      </td>
+    </tr>
+  </table>
+
+</form>

@@ -1,0 +1,30 @@
+<div>
+  <table *ngIf="taskList.length !== 0" border="1">
+    <thead>
+    <tr>
+      <th>任务名称</th>
+      <th>创建时间</th>
+      <th>领取时间</th>
+      <th>到期时间</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of taskList">
+      <td>{{item?.name}}</td>
+      <td>{{item?.createTime | date:'yyyy-MM-dd'}}</td>
+      <td>{{item?.claimTime | date:'yyyy-MM-dd'}}</td>
+      <td>{{item?.dueTime | date:'yyyy-MM-dd'}}</td>
+      <td>
+        <a href="javascript:void(0);" *ngIf="!item.claimTime" (click)="claim(item.id)">领取</a>
+        <a href="javascript:void(0);" *ngIf="item.claimTime" (click)="detail(item.id)">操作</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="taskList.length === 0">
+    暂时没有任务
+  </div>
+
+</div>
