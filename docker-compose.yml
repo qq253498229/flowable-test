@@ -1,0 +1,36 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: flowable
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - 3306:3306
+  modeler:
+    image: registry.cn-beijing.aliyuncs.com/codeforfun/flowable-modeler
+    environment:
+      - SERVER_PORT=8888
+      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=com.mysql.jdbc.Driver
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/flowable
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - FLOWABLE_COMMON_APP_IDM-URL=http://idm:8080/flowable-idm
+      - FLOWABLE_COMMON_APP_IDM-REDIRECT-URL=http://localhost:8080/flowable-idm
+      - FLOWABLE_COMMON_APP_IDM-ADMIN_USER=admin
+      - FLOWABLE_COMMON_APP_IDM-ADMIN_PASSWORD=test
+    ports:
+      - 8888:8888
+    entrypoint: ["./wait-for-something.sh", "mysql", "3306", "MySQL", "java", "-jar", "app.war"]
+  idm:
+    image: registry.cn-beijing.aliyuncs.com/codeforfun/flowable-idm
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=com.mysql.jdbc.Driver
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/flowable
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    ports:
+      - 8080:8080
+    entrypoint: ["./wait-for-something.sh", "mysql", "3306", "MySQL", "java", "-jar", "app.war"]
