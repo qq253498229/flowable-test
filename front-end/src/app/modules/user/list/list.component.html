@@ -8,6 +8,7 @@
     <thead>
     <tr>
       <th>ID</th>
+      <th>ID前缀</th>
       <th>FirstName</th>
       <th>LastName</th>
       <th>Email</th>
@@ -18,6 +19,7 @@
     <tbody>
     <tr *ngFor="let data of basicTable.data">
       <td>{{data['id']}}</td>
+      <td>{{data['idPrefix']}}</td>
       <td>{{data['firstName']}}</td>
       <td>{{data['lastName']}}</td>
       <td>{{data['email']}}</td>
