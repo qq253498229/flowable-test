@@ -1,5 +1,27 @@
-<a routerLink="/user">用户</a> &nbsp;
-<a routerLink="/group">分组</a> &nbsp;
-<a routerLink="/process">流程</a> &nbsp;
-<a routerLink="/task">任务</a> &nbsp;
-<router-outlet></router-outlet>
+<nz-layout>
+  <nz-header>
+    <ul nz-menu [nzMode]="'horizontal'" [nzSelectable]="false">
+      <li nz-menu-item routerLink="/user" [nzSelected]="router.url === '/user'">
+        <i nz-icon nzType="user" nzTheme="outline"></i>
+        用户
+      </li>
+      <li nz-menu-item routerLink="/group" [nzSelected]="router.url === '/group'">
+        <i nz-icon nzType="team" nzTheme="outline"></i>
+        分组
+      </li>
+      <li nz-menu-item routerLink="/process" [nzSelected]="router.url === '/process'">
+        <i nz-icon nzType="setting" nzTheme="outline"></i>
+        流程
+      </li>
+      <li nz-menu-item routerLink="/task" [nzSelected]="router.url === '/task'">
+        <i nz-icon nzType="dashboard" nzTheme="outline"></i>
+        任务
+      </li>
+    </ul>
+  </nz-header>
+  <nz-content>
+    <router-outlet></router-outlet>
+    <nz-back-top></nz-back-top>
+  </nz-content>
+  <nz-footer style="text-align: center;">Ant Design ©2019 Implement By Angular</nz-footer>
+</nz-layout>

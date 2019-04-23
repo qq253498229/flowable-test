@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+.float-left {
+  float: left !important;
+}
+
+.float-right {
+  float: right !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+body {
+  background: #f0f2f5 !important;
+}
+
+.pl15 {
+  padding-left: 15px !important;
+}
+
+.pr15 {
+  padding-right: 15px !important;;
+}
+
+.mb7 {
+  margin-bottom: 7px !important;
+}
+
+.mb15 {
+  margin-bottom: 15px !important;
+}
+
+.mb25 {
+  margin-bottom: 25px !important;
+}
+
+.pt5 {
+  padding-top: 5px !important;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+// Mixin itself
+@mixin clearfix() {
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+
+// Usage as a mixin
+.element {
+  @include clearfix;
+}
