@@ -7,6 +7,7 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
+  dataSet = [];
 
   constructor(
     private http: HttpClient
@@ -14,8 +15,9 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get('/api/user').subscribe(res => {
+    this.http.get<any[]>('/api/user').subscribe(res => {
       console.log(res);
+      this.dataSet = res;
     });
   }
 

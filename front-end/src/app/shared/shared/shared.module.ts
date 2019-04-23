@@ -3,12 +3,15 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
+import {TrueFalsePipe} from '../pipe/true-false.pipe';
 
 const THIRD_MODULES = [
   NgZorroAntdModule
 ];
 const COMPONENTS = [];
-const DIRECTIVES = [];
+const DIRECTIVES = [
+  TrueFalsePipe
+];
 
 @NgModule({
   declarations: [
