@@ -17,11 +17,11 @@
     </thead>
     <tbody>
     <tr *ngFor="let data of basicTable.data">
-      <td>{{data.id}}</td>
-      <td>{{data.firstName}}</td>
-      <td>{{data.lastName}}</td>
-      <td>{{data.email}}</td>
-      <td>{{data.deleted | trueFalse}}</td>
+      <td>{{data['id']}}</td>
+      <td>{{data['firstName']}}</td>
+      <td>{{data['lastName']}}</td>
+      <td>{{data['email']}}</td>
+      <td>{{data['deleted ']| trueFalse}}</td>
       <td>
         <a>修改</a>
         <nz-divider nzType="vertical"></nz-divider>
