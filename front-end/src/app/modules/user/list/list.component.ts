@@ -18,12 +18,13 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.http.get<any[]>('/api/user').subscribe(res => {
-      console.log(res);
+      console.log('userList', res);
       this.dataSet = res;
     });
   }
 
   choose(id: any) {
+    console.log('chooseId', id);
     this.service.userId = id;
   }
 }

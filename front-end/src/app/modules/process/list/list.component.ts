@@ -18,12 +18,13 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.http.get<any[]>('/api/process').subscribe(res => {
-      console.log(res);
+      console.log('processList', res);
       this.dataSet = res;
     });
   }
 
   open(id: any) {
+    console.log('openId', id);
     this.router.navigate(['/process', id]);
   }
 }

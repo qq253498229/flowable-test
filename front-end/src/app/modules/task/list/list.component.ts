@@ -20,12 +20,13 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.http.get<any[]>('/api/task/' + this.service.userId).subscribe(res => {
+      console.log('taskList', res);
       this.dataSet = res;
     });
   }
 
   operation(data: any) {
-    console.log(data);
+    console.log('operation', data);
     this.router.navigate(['/task', data.id]);
   }
 }
