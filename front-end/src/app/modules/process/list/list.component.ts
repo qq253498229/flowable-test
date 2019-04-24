@@ -13,14 +13,13 @@ export class ListComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private router: Router,
-    private service: SharedService
+    private router: Router
   ) {
   }
 
   ngOnInit() {
     this.http.get<any[]>('/api/process').subscribe(res => {
-      this.service.log(res);
+      SharedService.log(res);
       this.dataSet = res;
     });
   }

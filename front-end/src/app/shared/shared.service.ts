@@ -10,16 +10,22 @@ export class SharedService {
   }
 
   get userId() {
-    return localStorage.getItem('userId');
+    return localStorage.getItem(this.key);
   }
 
   set userId(userId: string) {
-    localStorage.setItem('userId', userId);
+    localStorage.setItem(this.key, userId);
   }
 
-  log(obj: any) {
+  key = 'userId';
+
+  static log(obj: any) {
     if (!environment.production) {
       console.log(obj);
     }
+  }
+
+  authCheck() {
+    return !!this.userId;
   }
 }

@@ -22,22 +22,21 @@ export class StartComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient,
-    private service: SharedService
+    private http: HttpClient
   ) {
   }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.http.get<any>('/api/process/' + id).subscribe(res => {
-      this.service.log(res.form.fields[0]);
-      this.service.log(res.form.fields[1]);
+      SharedService.log(res.form.fields[0]);
+      SharedService.log(res.form.fields[1]);
       this.result = res;
     });
   }
 
   submit() {
-    this.service.log(this.param);
+    SharedService.log(this.param);
   }
 
 }
