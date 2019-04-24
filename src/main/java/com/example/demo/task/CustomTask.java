@@ -1,13 +1,13 @@
 package com.example.demo.task;
 
 import lombok.Data;
+import org.flowable.form.api.FormModel;
 import org.flowable.task.api.Task;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.util.Date;
-import java.util.Map;
 
 /**
  * @author wangbin
@@ -28,7 +28,9 @@ public class CustomTask {
     private String processDefinitionId;
     private String processInstanceId;
     @Transient
-    private Map<String, Object> processVariables;
+    private FormModel formModel;
+    @Transient
+    private FormModel startFormModel;
 
     public CustomTask(Task task) {
         this.id = task.getId();
@@ -42,7 +44,15 @@ public class CustomTask {
         this.dueDate = task.getDueDate();
         this.processDefinitionId = task.getProcessDefinitionId();
         this.processInstanceId = task.getProcessInstanceId();
-        this.processVariables = task.getProcessVariables();
     }
 
+    public CustomTask(Task task, FormModel formModel) {
+        this(task);
+        this.formModel = formModel;
+    }
+
+    public CustomTask(Task task, FormModel formModel, FormModel startFormModel) {
+        this(task, formModel);
+        this.startFormModel = startFormModel;
+    }
 }

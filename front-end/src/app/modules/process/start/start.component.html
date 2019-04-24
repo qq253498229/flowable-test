@@ -20,19 +20,6 @@
           </nz-form-explain>
         </nz-form-control>
       </nz-form-item>
-
-
-      <!--<nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">name</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input required [(ngModel)]="model.name" #name="ngModel" name="name">
-          <nz-form-explain *ngIf="name.dirty && name.errors">
-            请输入name
-          </nz-form-explain>
-        </nz-form-control>
-      </nz-form-item>-->
-
-
       <nz-form-item nz-row>
         <nz-form-control [nzSpan]="14" [nzOffset]="6">
           <button nz-button nzType="primary" [disabled]="!form.form.valid" (click)="submit()">开启流程</button>

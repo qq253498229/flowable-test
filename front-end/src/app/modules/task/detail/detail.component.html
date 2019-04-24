@@ -1,0 +1,43 @@
+<div nz-row>
+  <nz-card nzTitle="任务详情">
+    <form nz-form #form="ngForm">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24">任务名称</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <span>{{result.name}}</span>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24">创建时间</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <span>{{result.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+        </nz-form-control>
+      </nz-form-item>
+      <!--任务开始表单-->
+      <ng-container *ngIf="result.startFormModel">
+        <nz-form-item *ngFor="let item of result.startFormModel['fields']">
+          <nz-form-label [nzSm]="6" [nzXs]="24">{{item['name']}}</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            {{item['value']}}
+          </nz-form-control>
+        </nz-form-item>
+      </ng-container>
+
+      <!--任务表单-->
+      <nz-form-item *ngFor="let item of result.formModel['fields']">
+        <nz-form-label [nzSm]="6" [nzXs]="24">{{item['name']}}</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <nz-radio-group [(ngModel)]="param[item['id']]" [name]="item['id']"
+                          *ngIf="item['fieldType'] == 'OptionFormField'">
+            <label nz-radio [nzValue]="option['name']" *ngFor="let option of item['options']">{{option['name']}}</label>
+          </nz-radio-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nz-row style="margin-bottom:8px;">
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button nzType="primary" (click)="submit()">提交</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-card>
+</div>

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {SharedService} from '../../../shared/shared.service';
 
@@ -24,24 +24,23 @@ export class StartComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private service: SharedService
+    private service: SharedService,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log(this.id);
     this.http.get<any>('/api/process/' + this.id).subscribe(res => {
-      console.log(res.form.fields[0]);
-      console.log(res.form.fields[1]);
       this.result = res;
     });
   }
 
   submit() {
     console.log(this.param);
-    this.http.post('/api/process/start/' + this.id + '/' + this.service.userId, this.param).subscribe(res => {
-      console.log(res);
+    this.http.post('/api/process/start/' + this.id + '/' + this.service.userId, this.param).subscribe(() => {
+      alert('开启成功');
+      this.router.navigate(['/process']);
     });
   }
 

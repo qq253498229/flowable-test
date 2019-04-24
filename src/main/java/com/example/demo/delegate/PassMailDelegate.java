@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class MailDelegate implements JavaDelegate {
+public class PassMailDelegate implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) {
-        log.info("MailDelegate received.");
+        log.info("接到通过回调.");
         log.info("instance id:{}", execution.getRootProcessInstanceId());
     }
 }

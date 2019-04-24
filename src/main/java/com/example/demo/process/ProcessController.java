@@ -57,7 +57,7 @@ public class ProcessController {
     @PostMapping("/start/{processDefinitionId}/{userId}")
     public ResponseEntity start(@PathVariable String processDefinitionId, @RequestBody Map<String, Object> variables, @PathVariable String userId) {
         variables.put("initiator", userId);
-        processEngine.getRuntimeService().startProcessInstanceById(processDefinitionId, variables);
+        processEngine.getRuntimeService().startProcessInstanceWithForm(processDefinitionId, null, variables, null);
         return ok().build();
     }
 }

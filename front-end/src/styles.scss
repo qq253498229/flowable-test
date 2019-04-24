@@ -43,6 +43,7 @@ body {
   display: inline-block;
 }
 
+/*
 // Mixin itself
 @mixin clearfix() {
   &::after {
@@ -56,3 +57,4 @@ body {
 .element {
   @include clearfix;
 }
+*/

@@ -1,4 +1,4 @@
-<nz-layout>
+<nz-layout class="layout">
   <nz-header>
     <ul nz-menu [nzMode]="'horizontal'" [nzSelectable]="false">
       <li nz-menu-item routerLink="/user" [nzSelected]="router.url.startsWith('/user')">
@@ -22,5 +22,5 @@
     <router-outlet></router-outlet>
     <nz-back-top></nz-back-top>
   </nz-content>
-  <nz-footer style="text-align: center;">Ant Design ©2019 Implement By Angular</nz-footer>
+  <nz-footer>Ant Design ©2019 Implement By Angular</nz-footer>
 </nz-layout>

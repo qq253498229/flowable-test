@@ -29,4 +29,12 @@ export class ListComponent implements OnInit {
     console.log('operation', data);
     this.router.navigate(['/task', data.id]);
   }
+
+  delete(data: any) {
+    console.log('delete', data);
+    this.http.delete('/api/task/' + data.id).subscribe(() => {
+      alert('删除成功');
+      this.ngOnInit();
+    });
+  }
 }
