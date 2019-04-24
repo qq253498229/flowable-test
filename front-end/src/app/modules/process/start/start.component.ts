@@ -10,6 +10,7 @@ import {SharedService} from '../../../shared/shared.service';
 })
 export class StartComponent implements OnInit {
   param = {};
+  id = '';
 
   result = {
     process: {
@@ -17,18 +18,20 @@ export class StartComponent implements OnInit {
     },
     form: {
       fields: []
-    }
+    },
   };
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private service: SharedService
   ) {
   }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.http.get<any>('/api/process/' + id).subscribe(res => {
+    this.id = this.route.snapshot.paramMap.get('id');
+    SharedService.log(this.id);
+    this.http.get<any>('/api/process/' + this.id).subscribe(res => {
       SharedService.log(res.form.fields[0]);
       SharedService.log(res.form.fields[1]);
       this.result = res;
@@ -37,6 +40,9 @@ export class StartComponent implements OnInit {
 
   submit() {
     SharedService.log(this.param);
+    this.http.post('/api/process/start/' + this.id + '/' + this.service.userId, this.param).subscribe(res => {
+      SharedService.log(res);
+    });
   }
 
 }

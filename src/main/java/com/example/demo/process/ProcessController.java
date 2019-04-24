@@ -7,10 +7,7 @@ import org.flowable.engine.repository.ProcessDefinition;
 import org.flowable.form.api.FormModel;
 import org.flowable.form.engine.FormEngine;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -57,9 +54,10 @@ public class ProcessController {
         return ok(map);
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity start(@PathVariable String userId) {
-
+    @PostMapping("/start/{processDefinitionId}/{userId}")
+    public ResponseEntity start(@PathVariable String processDefinitionId, @RequestBody Map<String, Object> variables, @PathVariable String userId) {
+        variables.put("initiator", userId);
+        processEngine.getRuntimeService().startProcessInstanceById(processDefinitionId, variables);
         return ok().build();
     }
 }

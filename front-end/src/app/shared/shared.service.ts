@@ -5,6 +5,7 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class SharedService {
+  key = 'userId';
 
   constructor() {
   }
@@ -16,8 +17,6 @@ export class SharedService {
   set userId(userId: string) {
     localStorage.setItem(this.key, userId);
   }
-
-  key = 'userId';
 
   static log(obj: any) {
     if (!environment.production) {
