@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {SharedService} from '../../../shared/shared.service';
 
 @Component({
   selector: 'app-list',
@@ -10,15 +11,19 @@ export class ListComponent implements OnInit {
   dataSet = [];
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private service: SharedService
   ) {
   }
 
   ngOnInit() {
     this.http.get<any[]>('/api/user').subscribe(res => {
-      console.log(res);
+      this.service.log(res);
       this.dataSet = res;
     });
   }
 
+  choose(id: any) {
+    this.service.userId = id;
+  }
 }

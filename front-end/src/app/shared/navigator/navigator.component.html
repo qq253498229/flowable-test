@@ -1,19 +1,19 @@
 <nz-layout>
   <nz-header>
     <ul nz-menu [nzMode]="'horizontal'" [nzSelectable]="false">
-      <li nz-menu-item routerLink="/user" [nzSelected]="router.url === '/user'">
+      <li nz-menu-item routerLink="/user" [nzSelected]="router.url.startsWith('/user')">
         <i nz-icon nzType="user" nzTheme="outline"></i>
         用户
       </li>
-      <li nz-menu-item routerLink="/group" [nzSelected]="router.url === '/group'">
+      <li nz-menu-item routerLink="/group" [nzSelected]="router.url.startsWith('/group')">
         <i nz-icon nzType="team" nzTheme="outline"></i>
         分组
       </li>
-      <li nz-menu-item routerLink="/process" [nzSelected]="router.url === '/process'">
+      <li nz-menu-item routerLink="/process" [nzSelected]="router.url.startsWith('/process')">
         <i nz-icon nzType="setting" nzTheme="outline"></i>
         流程
       </li>
-      <li nz-menu-item routerLink="/task" [nzSelected]="router.url === '/task'">
+      <li nz-menu-item routerLink="/task" [nzSelected]="router.url.startsWith('/task')">
         <i nz-icon nzType="dashboard" nzTheme="outline"></i>
         任务
       </li>

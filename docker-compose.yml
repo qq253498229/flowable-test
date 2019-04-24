@@ -8,6 +8,21 @@ services:
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     ports:
       - 3306:3306
+  rest:
+    image: registry.cn-beijing.aliyuncs.com/codeforfun/flowable-rest
+    environment:
+      - SERVER_PORT=9977
+      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=com.mysql.jdbc.Driver
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/flowable
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - FLOWABLE_REST_APP_ADMIN_USER-ID=rest-admin
+      - FLOWABLE_REST_APP_ADMIN_PASSWORD=test
+      - FLOWABLE_REST_APP_ADMIN_FIRST-NAME=Rest
+      - FLOWABLE_REST_APP_ADMIN_LAST-NAME=Admin
+    ports:
+      - 9977:9977
+    entrypoint: ["./wait-for-something.sh", "mysql", "3306", "MySQL", "java", "-jar", "app.war"]
   modeler:
     image: registry.cn-beijing.aliyuncs.com/codeforfun/flowable-modeler
     environment:
@@ -20,8 +35,24 @@ services:
       - FLOWABLE_COMMON_APP_IDM-REDIRECT-URL=http://localhost:8080/flowable-idm
       - FLOWABLE_COMMON_APP_IDM-ADMIN_USER=admin
       - FLOWABLE_COMMON_APP_IDM-ADMIN_PASSWORD=test
+      - FLOWABLE_MODELER_APP_DEPLOYMENT-API-URL=http://task:9999/flowable-task/app-api
     ports:
       - 8888:8888
+    entrypoint: ["./wait-for-something.sh", "mysql", "3306", "MySQL", "java", "-jar", "app.war"]
+  task:
+    image: registry.cn-beijing.aliyuncs.com/codeforfun/flowable-task
+    environment:
+      - SERVER_PORT=9999
+      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=com.mysql.jdbc.Driver
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/flowable
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - FLOWABLE_COMMON_APP_IDM-URL=http://idm:8080/flowable-idm
+      - FLOWABLE_COMMON_APP_IDM-REDIRECT-URL=http://localhost:8080/flowable-idm
+      - FLOWABLE_COMMON_APP_IDM-ADMIN_USER=admin
+      - FLOWABLE_COMMON_APP_IDM-ADMIN_PASSWORD=test
+    ports:
+      - 9999:9999
     entrypoint: ["./wait-for-something.sh", "mysql", "3306", "MySQL", "java", "-jar", "app.war"]
   idm:
     image: registry.cn-beijing.aliyuncs.com/codeforfun/flowable-idm
@@ -33,4 +64,43 @@ services:
       - SPRING_DATASOURCE_PASSWORD=root
     ports:
       - 8080:8080
+    entrypoint: ["./wait-for-something.sh", "mysql", "3306", "MySQL", "java", "-jar", "app.war"]
+  admin:
+    image: registry.cn-beijing.aliyuncs.com/codeforfun/flowable-admin
+    environment:
+      - SERVER_PORT=9988
+      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=com.mysql.jdbc.Driver
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/flowable
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - FLOWABLE_COMMON_APP_IDM-URL=http://idm:8080/flowable-idm
+      - FLOWABLE_COMMON_APP_IDM-REDIRECT-URL=http://localhost:8080/flowable-idm
+      - FLOWABLE_COMMON_APP_IDM-ADMIN_USER=admin
+      - FLOWABLE_COMMON_APP_IDM-ADMIN_PASSWORD=test
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_PROCESS_SERVER-ADDRESS=http://task
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_PROCESS_PORT=9999
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_PROCESS_CONTEXT-ROOT=flowable-task
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_PROCESS_REST-ROOT=process-api
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_CMMN_SERVER-ADDRESS=http://task
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_CMMN_PORT=9999
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_CMMN_CONTEXT-ROOT=flowable-task
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_CMMN_REST-ROOT=cmmn-api
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_DMN_SERVER-ADDRESS=http://task
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_DMN_PORT=9999
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_DMN_CONTEXT-ROOT=flowable-task
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_DMN_REST-ROOT=dmn-api
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_FORM_SERVER-ADDRESS=http://task
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_FORM_PORT=9999
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_FORM_CONTEXT-ROOT=flowable-task
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_FORM_REST-ROOT=form-api
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_CONTENT_SERVER-ADDRESS=http://task
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_CONTENT_PORT=9999
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_CONTENT_CONTEXT-ROOT=flowable-task
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_CONTENT_REST-ROOT=content-api
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_APP_SERVER-ADDRESS=http://task
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_APP_PORT=9999
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_APP_CONTEXT-ROOT=flowable-task
+      - FLOWABLE_ADMIN_APP_SERVER-CONFIG_APP_REST-ROOT=app-api
+    ports:
+      - 9988:9988
     entrypoint: ["./wait-for-something.sh", "mysql", "3306", "MySQL", "java", "-jar", "app.war"]

@@ -25,9 +25,9 @@
       <td>{{data['email']}}</td>
       <td>{{data['deleted ']| trueFalse}}</td>
       <td>
-        <a>修改</a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <a>删除</a>
+        <a *ngIf="!service.userId || service.userId != data['id']" (click)="choose(data['id'])">选择</a>
+<!--        <nz-divider nzType="vertical"></nz-divider>-->
+<!--        <a>删除</a>-->
       </td>
     </tr>
     </tbody>
