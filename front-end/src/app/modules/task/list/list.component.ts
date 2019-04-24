@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {SharedService} from '../../../shared/shared.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -12,18 +13,19 @@ export class ListComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private service: SharedService
+    private service: SharedService,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
     this.http.get<any[]>('/api/task/' + this.service.userId).subscribe(res => {
-      SharedService.log(res[0]);
       this.dataSet = res;
     });
   }
 
   operation(data: any) {
-    SharedService.log(data);
+    console.log(data);
+    this.router.navigate(['/task', data.id]);
   }
 }

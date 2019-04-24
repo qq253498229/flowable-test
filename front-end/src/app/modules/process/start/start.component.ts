@@ -30,18 +30,18 @@ export class StartComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-    SharedService.log(this.id);
+    console.log(this.id);
     this.http.get<any>('/api/process/' + this.id).subscribe(res => {
-      SharedService.log(res.form.fields[0]);
-      SharedService.log(res.form.fields[1]);
+      console.log(res.form.fields[0]);
+      console.log(res.form.fields[1]);
       this.result = res;
     });
   }
 
   submit() {
-    SharedService.log(this.param);
+    console.log(this.param);
     this.http.post('/api/process/start/' + this.id + '/' + this.service.userId, this.param).subscribe(res => {
-      SharedService.log(res);
+      console.log(res);
     });
   }
 

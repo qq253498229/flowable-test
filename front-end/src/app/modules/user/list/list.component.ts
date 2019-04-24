@@ -18,7 +18,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.http.get<any[]>('/api/user').subscribe(res => {
-      SharedService.log(res);
+      console.log(res);
       this.dataSet = res;
     });
   }

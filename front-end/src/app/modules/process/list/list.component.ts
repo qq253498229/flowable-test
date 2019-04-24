@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {SharedService} from '../../../shared/shared.service';
 
 @Component({
   selector: 'app-list',
@@ -19,7 +18,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.http.get<any[]>('/api/process').subscribe(res => {
-      SharedService.log(res);
+      console.log(res);
       this.dataSet = res;
     });
   }

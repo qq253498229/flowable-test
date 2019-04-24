@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +15,6 @@ export class SharedService {
 
   set userId(userId: string) {
     localStorage.setItem(this.key, userId);
-  }
-
-  static log(obj: any) {
-    if (!environment.production) {
-      console.log(obj);
-    }
   }
 
   authCheck() {
