@@ -17,6 +17,9 @@
         <i nz-icon nzType="dashboard" nzTheme="outline"></i>
         任务
       </li>
+      <li *ngIf="service.userId" nz-menu-item class="float-right">
+        当前用户：{{service.userId}}
+      </li>
     </ul>
   </nz-header>
   <nz-content>

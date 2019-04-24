@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {SharedService} from '../shared.service';
 
 @Component({
   selector: 'app-navigator',
@@ -9,7 +10,8 @@ import {Router} from '@angular/router';
 export class NavigatorComponent implements OnInit {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private service: SharedService
   ) {
   }
 
