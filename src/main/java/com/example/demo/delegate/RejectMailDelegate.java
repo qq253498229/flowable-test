@@ -3,12 +3,12 @@ package com.example.demo.delegate;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.delegate.DelegateExecution;
 import org.flowable.engine.delegate.JavaDelegate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * @author wangbin
  */
-@Component
+@Service
 @Slf4j
 public class RejectMailDelegate implements JavaDelegate {
     @Override
