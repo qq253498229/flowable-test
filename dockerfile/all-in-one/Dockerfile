@@ -1,4 +1,4 @@
-FROM flowable/all-in-one:latest
+FROM flowable/all-in-one:6.4.1
 
 
 USER root
