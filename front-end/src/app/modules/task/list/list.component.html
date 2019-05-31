@@ -1,0 +1,35 @@
+<div nz-row>
+  <h1>
+    任务
+  </h1>
+</div>
+<div nz-row>
+  <nz-table #basicTable [nzData]="dataSet" [nzShowPagination]="false">
+    <thead>
+    <tr>
+      <th>任务名称</th>
+      <th>指派人</th>
+      <th>创建时间</th>
+      <th>领取时间</th>
+      <th>截止时间</th>
+      <th>表单key</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{data['name']}}</td>
+      <td>{{data['assignee']}}</td>
+      <td>{{data['createTime'] | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>{{data['claimTime'] | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>{{data['dueTime'] | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>{{data['formKey']}}</td>
+      <td>
+        <a (click)="operation(data)">操作</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a (click)="delete(data)">删除</a>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</div>

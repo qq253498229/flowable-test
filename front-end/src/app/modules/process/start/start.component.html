@@ -1,0 +1,32 @@
+<div nz-row>
+  <div nz-col nzSpan="24">
+    <h1>{{result.process.name}}</h1>
+  </div>
+  <nz-divider></nz-divider>
+  <div nz-col nzSpan="24">
+    <form #form="ngForm">
+
+      <nz-form-item *ngFor="let item of result.form.fields">
+        <nz-form-label [nzSm]="6" [nzXs]="24" [nzRequired]="item['required']"
+                       nzFor="email">{{item['name']}}</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input [required]="item['required']" [(ngModel)]="param[item['id']]" [name]="item['id']"
+                 *ngIf="item['type'] == 'integer'" type="number" [placeholder]="item['placeholder']">
+          <textarea nz-input [required]="item['required']" [(ngModel)]="param[item['id']]" [name]="item['id']"
+                    *ngIf="item['type'] == 'multi-line-text'" [placeholder]="item['placeholder']"></textarea>
+
+          <nz-form-explain *ngIf="form.form.get(item['id'])?.dirty && form.form.get(item['id'])?.errors">
+            请输入{{item['name']}}
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nz-row>
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button nzType="primary" [disabled]="!form.form.valid" (click)="submit()">开启流程</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+
+  </div>
+</div>
+

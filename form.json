@@ -1,0 +1,38 @@
+{
+  "id": "58753325-659c-11e9-a467-0242ac1d0003",
+  "name": "请假表单",
+  "key": "leave-form",
+  "description": "",
+  "editorJson": {
+    "name": "请假表单",
+    "key": "leave-form",
+    "version": 0,
+    "fields": [
+      {
+        "fieldType": "FormField",
+        "id": "day",
+        "name": "请假天数",
+        "type": "integer",
+        "value": null,
+        "required": true,
+        "readOnly": false,
+        "overrideId": true,
+        "placeholder": null,
+        "layout": null
+      },
+      {
+        "fieldType": "FormField",
+        "id": "reason",
+        "name": "请假理由",
+        "type": "multi-line-text",
+        "value": null,
+        "required": false,
+        "readOnly": false,
+        "overrideId": true,
+        "placeholder": null,
+        "layout": null
+      }
+    ],
+    "outcomes": []
+  }
+}

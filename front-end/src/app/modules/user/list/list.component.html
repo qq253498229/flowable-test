@@ -1,0 +1,35 @@
+<div nz-row>
+  <h1>
+    用户列表
+  </h1>
+</div>
+<div nz-row>
+  <nz-table #basicTable [nzData]="dataSet" [nzShowPagination]="false">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>ID前缀</th>
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>Email</th>
+      <th>是否删除</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{data['id']}}</td>
+      <td>{{data['idPrefix']}}</td>
+      <td>{{data['firstName']}}</td>
+      <td>{{data['lastName']}}</td>
+      <td>{{data['email']}}</td>
+      <td>{{data['deleted ']| trueFalse}}</td>
+      <td>
+        <a *ngIf="!service.userId || service.userId != data['id']" (click)="choose(data['id'])">选择</a>
+<!--        <nz-divider nzType="vertical"></nz-divider>-->
+<!--        <a>删除</a>-->
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</div>
